@@ -28,6 +28,39 @@ $user = $_SESSION["LoggedUser"];
              <div class="flex flex-col flex-1 w-full">
                      <?php include './pages/pageheader.php'; ?>
                 <main class="h-full overflow-y-auto">
+
+                    <?php
+                    if ($user['type'] == "student") {
+                        ?>
+                        <div class="container px-6 mx-auto grid">
+                            <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"> Notifications </h2> 
+                            <div class="grid gap-6 mb-8">
+                                <?php
+                                $query0 = "SELECT * FROM student WHERE iduser='" . $user['iduser'] . "'";
+                                $result0 = mysqli_query($con, $query0) or die();
+                                $row0 = mysqli_fetch_assoc($result0);
+                                $query01 = "SELECT * FROM unread_notification INNER JOIN notification ON (`unread_notification`.`idnotification` = `notification`.`idnotification`) WHERE idstudent='" . $row0["idstudent"] . "' AND status='active'";
+                                $result01 = mysqli_query($con, $query01) or die();
+                                while ($row01 = mysqli_fetch_assoc($result01)) {
+                                    ?>
+                                    <div class="flex items-center bg-blue-500 text-white text-sm font-bold px-4 py-3" role="alert">
+                                        <p><?= $row01["notif"] ?></p>
+                                        <form action="actions/mark_as_read.php">
+                                            <input type="hidden" name="unreadnotification" value="<?= $row01["idunreadnotification"] ?>"/>
+                                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
+                                                Mark as Read
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <?php
+                                }
+                                ?>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                    ?>
+
                     <div class="container px-6 mx-auto grid md:grid-cols-2">
                         <div class="mb-2">
                             <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"> Upcomming Classes </h2>
@@ -186,23 +219,23 @@ $user = $_SESSION["LoggedUser"];
                 $('#eventDate').val(jsonObj.date);
                 $('#eventStart').val(jsonObj.start);
                 $('#eventEnd').val(jsonObj.end);
-                <?php if ($user['type'] == "student") { ?>
+<?php if ($user['type'] == "student") { ?>
                     $.get("actions/update_student_event_view.php?eventId=" + jsonObj.idscheduled_event, function (data) {
                         console.log(data);
                     });
-                <?php } ?>
+<?php } ?>
             }
         </script>
         <!--Start of Tawk.to Script-->
         <script type="text/javascript">
-            var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-            (function(){
-                var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-                s1.async=true;
-                s1.src='https://embed.tawk.to/6273d9c5b0d10b6f3e70c340/1g2a8lbie';
-                s1.charset='UTF-8';
-                s1.setAttribute('crossorigin','*');
-                s0.parentNode.insertBefore(s1,s0);
+            var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+            (function () {
+                var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+                s1.async = true;
+                s1.src = 'https://embed.tawk.to/6273d9c5b0d10b6f3e70c340/1g2a8lbie';
+                s1.charset = 'UTF-8';
+                s1.setAttribute('crossorigin', '*');
+                s0.parentNode.insertBefore(s1, s0);
             })();
         </script>
         <!--End of Tawk.to Script-->

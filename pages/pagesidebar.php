@@ -78,12 +78,39 @@ $unselectedClassStr = "inline-flex items-center w-full text-sm font-semibold tra
                     </a>
                 </li>
                 <li class="relative px-6 py-3">
+                    <?php echo $selectedPage == "add_new_due" ? $selectedIndecatorSpan : ""; ?>
+                    <a class="<?php echo $selectedPage == "add_new_due" ? $selectedClassStr : $unselectedClassStr; ?>" href="add_new_due.php">
+                        <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                        <path d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                        </svg>
+                        <span class="ml-4">Add Due</span>
+                    </a>
+                </li>
+                <li class="relative px-6 py-3">
                     <?php echo $selectedPage == "register_subjects" ? $selectedIndecatorSpan : ""; ?>
                     <a class="<?php echo $selectedPage == "register_subjects" ? $selectedClassStr : $unselectedClassStr; ?>" href="register_subjects.php">
                         <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                         <path d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
                         </svg>
                         <span class="ml-4">Register Subjects</span>
+                    </a>
+                </li>
+                <li class="relative px-6 py-3">
+                    <?php echo $selectedPage == "recordings" ? $selectedIndecatorSpan : ""; ?>
+                    <a class="<?php echo $selectedPage == "recordings" ? $selectedClassStr : $unselectedClassStr; ?>" href="recordings.php">
+                        <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                        <path d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                        </svg>
+                        <span class="ml-4">Recordings</span>
+                    </a>
+                </li>
+                <li class="relative px-6 py-3">
+                    <?php echo $selectedPage == "create_announcements" ? $selectedIndecatorSpan : ""; ?>
+                    <a class="<?php echo $selectedPage == "create_announcements" ? $selectedClassStr : $unselectedClassStr; ?>" href="create_announcements.php">
+                        <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                        <path d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                        </svg>
+                        <span class="ml-4">Announcements</span>
                     </a>
                 </li>
                 <?php
@@ -126,12 +153,30 @@ $unselectedClassStr = "inline-flex items-center w-full text-sm font-semibold tra
                     </a>
                 </li>
                 <li class="relative px-6 py-3">
+                    <?php echo $selectedPage == "add_new_due" ? $selectedIndecatorSpan : ""; ?>
+                    <a class="<?php echo $selectedPage == "add_new_due" ? $selectedClassStr : $unselectedClassStr; ?>" href="add_new_due.php">
+                        <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                        <path d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                        </svg>
+                        <span class="ml-4">Add Due</span>
+                    </a>
+                </li>
+                <li class="relative px-6 py-3">
                     <?php echo $selectedPage == "recordings" ? $selectedIndecatorSpan : ""; ?>
                     <a class="<?php echo $selectedPage == "recordings" ? $selectedClassStr : $unselectedClassStr; ?>" href="recordings.php">
                         <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                         <path d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
                         </svg>
                         <span class="ml-4">Recordings</span>
+                    </a>
+                </li>
+                <li class="relative px-6 py-3">
+                    <?php echo $selectedPage == "create_announcements" ? $selectedIndecatorSpan : ""; ?>
+                    <a class="<?php echo $selectedPage == "create_announcements" ? $selectedClassStr : $unselectedClassStr; ?>" href="create_announcements.php">
+                        <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                        <path d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                        </svg>
+                        <span class="ml-4">Announcements</span>
                     </a>
                 </li>
                 <?php
@@ -153,6 +198,15 @@ $unselectedClassStr = "inline-flex items-center w-full text-sm font-semibold tra
                         <path d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
                         </svg>
                         <span class="ml-4">Recordings</span>
+                    </a>
+                </li>
+                <li class="relative px-6 py-3">
+                    <?php echo $selectedPage == "do_payment" ? $selectedIndecatorSpan : ""; ?>
+                    <a class="<?php echo $selectedPage == "do_payment" ? $selectedClassStr : $unselectedClassStr; ?>" href="do_payment.php">
+                        <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                        <path d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                        </svg>
+                        <span class="ml-4">Payments</span>
                     </a>
                 </li>
                 <?php
