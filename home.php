@@ -62,17 +62,14 @@ $user = $_SESSION["LoggedUser"];
                     ?>
 
                     <div class="container px-6 mx-auto grid md:grid-cols-2">
-                        <?php
-                            if ($user['type'] == "student") {
-                                ?>
                         <div class="mb-2">
                             <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"> Upcomming Classes </h2>
                             <!-- Cards -->
                             <div class="grid gap-6 mb-8 md:grid-cols-2">
                                 <?php
-                                $query = "SELECT * FROM `scheduled_event` INNER JOIN `student_subjects` ON (`scheduled_event`.`idsubject` = `student_subjects`.`idsubject`) INNER JOIN `student` ON (`student_subjects`.`idstudent` = `student`.`idstudent`) ";
+                                $query = "SELECT * FROM `scheduled_event`";
                                 if ($user['type'] == "student") {
-                                    $query .= "WHERE iduser='" . $user['iduser'] . "'";
+                                    $query .= "SELECT * FROM `scheduled_event` INNER JOIN `student_subjects` ON (`scheduled_event`.`idsubject` = `student_subjects`.`idsubject`) INNER JOIN `student` ON (`student_subjects`.`idstudent` = `student`.`idstudent`) WHERE iduser='" . $user['iduser'] . "'";
                                 }
                                 $result = mysqli_query($con, $query) or die();
                                 while ($row = mysqli_fetch_assoc($result)) {
@@ -99,18 +96,15 @@ $user = $_SESSION["LoggedUser"];
                                 ?>
                             </div>
                         </div>
-                            <?php
-                        }
-                        ?>
 
                         <div class="mb-2">
-                            <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"> Upcomming Exams </h2>
+                            <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"> Upcoming Exams </h2>
                             <!-- Cards -->
                             <div class="grid gap-6 mb-8 md:grid-cols-2">
                                 <?php
-                                $query1 = "SELECT * FROM `exam_result` INNER JOIN `exam` ON (`exam_result`.`idexam` = `exam`.`idexam`) INNER JOIN `student` ON (`exam_result`.`idstudent` = `student`.`idstudent`) INNER JOIN `subject` ON (`exam`.`idsubject` = `subject`.`idsubject`) ";
+                                $query1 = "SELECT * FROM `exam` INNER JOIN `subject` ON (`exam`.`idsubject` = `subject`.`idsubject`)";
                                 if ($user['type'] == "student") {
-                                    $query1 .= "WHERE `student`.`iduser`='" . $user['iduser'] . "'";
+                                    $query1 .= "SELECT * FROM `exam_result` INNER JOIN `exam` ON (`exam_result`.`idexam` = `exam`.`idexam`) INNER JOIN `student` ON (`exam_result`.`idstudent` = `student`.`idstudent`) INNER JOIN `subject` ON (`exam`.`idsubject` = `subject`.`idsubject`) WHERE `student`.`iduser`='" . $user['iduser'] . "'";
                                 }
                                 $result1 = mysqli_query($con, $query1) or die();
                                 while ($row = mysqli_fetch_assoc($result1)) {

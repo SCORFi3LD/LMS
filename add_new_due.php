@@ -35,23 +35,12 @@ $user = $_SESSION["LoggedUser"];
                         <!-- Card -->
                         <form action="actions/add_new_due.php" method="GET">
                             <div class="px-4 py-3 bg-white rounded-lg shadow-md dark:bg-gray-800">
-                                <label class="block mt-4 text-sm">
-                                    <span class="text-gray-700 dark:text-gray-400">
-                                        Subject
-                                    </span>
-                                    <select name="subject" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" required>
-                                        <option value="" disabled selected>Select a subject</option>
-                                        <?php
-                                        $query = "SELECT * FROM `lecturer` INNER JOIN `subject` ON (`lecturer`.`idsubject` = `subject`.`idsubject`) WHERE `subject`.status='active' AND iduser='". $user['iduser'] ."'";
-                                        $result = mysqli_query($con, $query) or die();
-                                        while ($row = mysqli_fetch_array($result)) {
-                                            ?>
-                                            <option value="<?php echo $row['idsubject']; ?>"><?php echo $row['subjectname']; ?></option>
-                                            <?php
-                                        }
-                                        ?>
-                                    </select>
-                                </label>
+                                <?php
+                                $query = "SELECT * FROM `lecturer` WHERE iduser='". $user['iduser'] ."'";
+                                $result = mysqli_query($con, $query) or die();
+                                $row = mysqli_fetch_array($result)
+                                ?>
+                                <input type="hidden" name="subject" value="<?= $row['idsubject']?>">
 
                                 <label class="block mt-4 text-sm">
                                     <span class="text-gray-700 dark:text-gray-400">Amount</span>
