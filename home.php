@@ -62,6 +62,9 @@ $user = $_SESSION["LoggedUser"];
                     ?>
 
                     <div class="container px-6 mx-auto grid md:grid-cols-2">
+                        <?php
+                            if ($user['type'] == "student") {
+                                ?>
                         <div class="mb-2">
                             <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"> Upcomming Classes </h2>
                             <!-- Cards -->
@@ -96,6 +99,9 @@ $user = $_SESSION["LoggedUser"];
                                 ?>
                             </div>
                         </div>
+                            <?php
+                        }
+                        ?>
 
                         <div class="mb-2">
                             <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"> Upcomming Exams </h2>

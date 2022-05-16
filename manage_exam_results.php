@@ -43,7 +43,7 @@ if ($user['type'] == 'student') {
                                     <select id="exam" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" required="">
                                         <option value="" disabled="" selected="">Select a exam</option>
                                         <?php
-                                        $query = "SELECT * FROM `exam` WHERE examstatus='active'";
+                                        $query = "SELECT * FROM `exam` INNER JOIN `subject` ON (`exam`.`idsubject` = `subject`.`idsubject`) INNER JOIN `lecturer` ON (`lecturer`.`idsubject` = `subject`.`idsubject`) WHERE examstatus='active' AND iduser='". $user['iduser'] ."'";
                                         $result = mysqli_query($con, $query) or die();
                                         while ($row = mysqli_fetch_array($result)) {
                                             ?>

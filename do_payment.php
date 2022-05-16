@@ -46,7 +46,7 @@ $row0 = mysqli_fetch_array($result0)
                                         <select name="subject" id="subject" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" required>
                                             <option value="" disabled selected>Select a subject</option>
                                             <?php
-                                            $query = "SELECT * FROM `subject` WHERE status='active'";
+                                            $query = "SELECT * FROM `student_subjects` INNER JOIN `subject` ON (`student_subjects`.`idsubject` = `subject`.`idsubject` ) WHERE `subject`.status='active' AND `student_subjects`.idstudent='" . $row0["idstudent"] . "'";
                                             $result = mysqli_query($con, $query) or die();
                                             while ($row = mysqli_fetch_array($result)) {
                                                 ?>

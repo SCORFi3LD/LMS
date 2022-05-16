@@ -42,7 +42,7 @@ $user = $_SESSION["LoggedUser"];
                                     <select name="subject" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" required>
                                         <option value="" disabled selected>Select a subject</option>
                                         <?php
-                                        $query = "SELECT * FROM `subject` WHERE status='active'";
+                                        $query = "SELECT * FROM `lecturer` INNER JOIN `subject` ON (`lecturer`.`idsubject` = `subject`.`idsubject`) WHERE `subject`.status='active' AND iduser='". $user['iduser'] ."'";
                                         $result = mysqli_query($con, $query) or die();
                                         while ($row = mysqli_fetch_array($result)) {
                                             ?>
@@ -67,17 +67,5 @@ $user = $_SESSION["LoggedUser"];
                 </main>
             </div>
         </div>
-
-        <!-- My Scripts -->
-        <script type="text/javascript">
-            function didChangeStatus(element, lecturer) {
-                var status = element.checked ? 'active' : 'deactive';
-                $.get("actions/update_user_status.php?id=" + lecturer + "&status=" + status, function (data) {
-                    if (data == 1) {
-                        location.reload()
-                    }
-                });
-            }
-        </script>
     </body>
 </html>
