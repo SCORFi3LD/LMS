@@ -69,7 +69,7 @@ $user = $_SESSION["LoggedUser"];
                                 <?php
                                 $query = "SELECT * FROM `scheduled_event`";
                                 if ($user['type'] == "student") {
-                                    $query .= "SELECT * FROM `scheduled_event` INNER JOIN `student_subjects` ON (`scheduled_event`.`idsubject` = `student_subjects`.`idsubject`) INNER JOIN `student` ON (`student_subjects`.`idstudent` = `student`.`idstudent`) WHERE iduser='" . $user['iduser'] . "'";
+                                    $query = "SELECT * FROM `scheduled_event` INNER JOIN `student_subjects` ON (`scheduled_event`.`idsubject` = `student_subjects`.`idsubject`) INNER JOIN `student` ON (`student_subjects`.`idstudent` = `student`.`idstudent`) WHERE iduser='" . $user['iduser'] . "'";
                                 }
                                 $result = mysqli_query($con, $query) or die();
                                 while ($row = mysqli_fetch_assoc($result)) {
@@ -104,7 +104,7 @@ $user = $_SESSION["LoggedUser"];
                                 <?php
                                 $query1 = "SELECT * FROM `exam` INNER JOIN `subject` ON (`exam`.`idsubject` = `subject`.`idsubject`)";
                                 if ($user['type'] == "student") {
-                                    $query1 .= "SELECT * FROM `exam_result` INNER JOIN `exam` ON (`exam_result`.`idexam` = `exam`.`idexam`) INNER JOIN `student` ON (`exam_result`.`idstudent` = `student`.`idstudent`) INNER JOIN `subject` ON (`exam`.`idsubject` = `subject`.`idsubject`) WHERE `student`.`iduser`='" . $user['iduser'] . "'";
+                                    $query1 = "SELECT * FROM `exam` INNER JOIN `subject` ON (`exam`.`idsubject` = `subject`.`idsubject`) INNER JOIN `exam_result` ON (`exam_result`.`idexam` = `exam`.`idexam`) INNER JOIN `student` ON (`exam_result`.`idstudent` = `student`.`idstudent`) WHERE `student`.`iduser`='" . $user['iduser'] . "'";
                                 }
                                 $result1 = mysqli_query($con, $query1) or die();
                                 while ($row = mysqli_fetch_assoc($result1)) {

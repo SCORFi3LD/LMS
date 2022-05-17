@@ -32,12 +32,25 @@ if (!isset($_SESSION["LoggedUser"])) {
                             <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"> Upload </h2>
                             <form action="actions/upload_recording.php" method="POST" enctype="multipart/form-data">
                                 <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
-                                    <?php
-                                    $query = "SELECT * FROM `lecturer` WHERE iduser='". $user['iduser'] ."'";
-                                    $result = mysqli_query($con, $query) or die();
-                                    $row = mysqli_fetch_array($result)
-                                    ?>
-                                    <input type="hidden" name="subject" value="<?= $row['idsubject']?>">
+
+                                    <label class="block mt-4 text-sm">
+                                        <span class="text-gray-700 dark:text-gray-400">
+                                            Subject
+                                        </span>
+                                        <select name="subject" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" required>
+                                            <option value="" disabled selected>Select a subject</option>
+                                            <?php
+                                            $query = "SELECT * FROM `lecturer` INNER JOIN `subject` ON (`lecturer`.`idsubject` = `subject`.`idsubject`) WHERE `subject`.status='active' AND iduser='". $user['iduser'] ."'";
+                                            $result = mysqli_query($con, $query) or die();
+                                            while ($row = mysqli_fetch_array($result)) {
+                                                ?>
+                                                <option value="<?php echo $row['idsubject']; ?>"><?php echo $row['subjectname']; ?></option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </label>
+
                                     <label class="block mt-4 mb-2 text-sm">
                                         <span class="text-gray-700 dark:text-gray-400">To upload file drag and drop files to here</span>
                                     </label>
