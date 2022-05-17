@@ -35,12 +35,14 @@ if ($user['type'] == 'student') {
                         <!-- Card -->
                         <form action="actions/save_exam.php" method="POST">
                             <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
-                                <label class="block text-sm">
-                                    <span class="text-gray-700 dark:text-gray-400">Subject</span>
-                                    <select name="subject" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" required="">
-                                        <option value="" disabled="" selected="">Select a subject</option>
-                                         <?php
-                                        $query = "SELECT * FROM `subject` WHERE status='active'";
+                                <label class="block mt-4 text-sm">
+                                        <span class="text-gray-700 dark:text-gray-400">
+                                            Subject
+                                        </span>
+                                    <select name="subject" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" required>
+                                        <option value="" disabled selected>Select a subject</option>
+                                        <?php
+                                        $query = "SELECT * FROM `lecturer` INNER JOIN `subject` ON (`lecturer`.`idsubject` = `subject`.`idsubject`) WHERE `subject`.status='active' AND iduser='". $user['iduser'] ."'";
                                         $result = mysqli_query($con, $query) or die();
                                         while ($row = mysqli_fetch_array($result)) {
                                             ?>
