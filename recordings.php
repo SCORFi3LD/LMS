@@ -68,36 +68,42 @@ if (!isset($_SESSION["LoggedUser"])) {
                             <div class="mb-2">
                                 <div class="grid gap-6 mb-8 md:grid-cols-2">
                                     <?php
-
                                     $query0 = "SELECT * FROM `lecturer` WHERE iduser='". $user['iduser'] ."'";
-                                    $result0 = mysqli_query($con, $query0) or die();
-                                    $row0 = mysqli_fetch_array($result0);
-
-                                    $query1 = "SELECT * FROM `recording` WHERE idsubject='". $row['idsubject'] ."'";
-                                    $result1 = mysqli_query($con, $query1) or die();
-                                    while ($row1 = mysqli_fetch_array($result1)) {
-                                        ?>
-                                        <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
-                                            <label class="block">
-                                            <video width="100%" height="315" controls="false" onclick="openFullscreen(this)">
-                                                <source src="<?php echo $row1['urlstring'];?>" type="video/mp4">
-                                                Your browser does not support the video tag.
-                                            </video>
-                                            </label>
-                                            <form action="actions/delete_recording.php">
-                                                <label class="block mt-4 text-sm" style="text-align:right;">
-                                                    <input type="text" name="recId" value="<?php echo $row1['idrecording'];?>">
-                                                    <button type="submit" class="px-4 py-2 text-sm font-medium text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-purple">Delete</button>
+                                    $result0 = mysqli_query($con, $query0);
+                                    if ($row0 = mysqli_fetch_array($result0)) {
+                                        $query1 = "SELECT * FROM `recording` WHERE idsubject='" . $row0['idsubject'] . "'";
+                                        $result1 = mysqli_query($con, $query1);
+                                        while ($row1 = mysqli_fetch_array($result1)) {
+                                            ?>
+                                            <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
+                                                <label class="block">
+                                                    <video width="100%" height="315" controls="false"
+                                                           onclick="openFullscreen(this)">
+                                                        <source src="<?php echo $row1['urlstring']; ?>" type="video/mp4">
+                                                        Your browser does not support the video tag.
+                                                    </video>
                                                 </label>
-                                            </form>
-                                        </div>
-                                    <?php }
+                                                <form action="actions/delete_recording.php">
+                                                    <label class="block mt-4 text-sm" style="text-align:right;">
+                                                        <input type="text" name="recId"
+                                                               value="<?php echo $row1['idrecording']; ?>">
+                                                        <button type="submit"
+                                                                class="px-4 py-2 text-sm font-medium text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-purple">
+                                                            Delete
+                                                        </button>
+                                                    </label>
+                                                </form>
+                                            </div>
+                                            <?php
+                                        }
+                                    }
                                     ?>
                                 </div>
                             </div>
                         </div>
 
                     <?php } else { ?>
+
                         <div class="container px-6 mx-auto grid">
                             <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"> Recordings </h2>
                             <!-- Card -->
@@ -105,7 +111,7 @@ if (!isset($_SESSION["LoggedUser"])) {
                                 <div class="grid gap-6 mb-8 md:grid-cols-2">
                                     <?php
                                     $query1 = "SELECT * FROM `student_subjects` INNER JOIN `student` ON (`student_subjects`.`idstudent` = `student`.`idstudent`) INNER JOIN `subject` ON (`student_subjects`.`idsubject` = `subject`.`idsubject`) INNER JOIN `recording` ON (`recording`.`idsubject` = `subject`.`idsubject`) INNER JOIN `user` ON (`student`.`iduser` = `user`.`iduser`) WHERE `user`.iduser='".$_SESSION["LoggedUser"]["iduser"]."'";
-                                    $result1 = mysqli_query($con, $query1) or die();
+                                    $result1 = mysqli_query($con, $query1);
                                     while ($row1 = mysqli_fetch_array($result1)) {
                                         ?>
                                         <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
