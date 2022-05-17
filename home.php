@@ -37,7 +37,7 @@ $user = $_SESSION["LoggedUser"];
                             <div class="grid gap-6 mb-8">
                                 <?php
                                 $query0 = "SELECT * FROM student WHERE iduser='" . $user['iduser'] . "'";
-                                $result0 = mysqli_query($con, $query0) or die();
+                                $result0 = mysqli_query($con, $query0);
                                 $row0 = mysqli_fetch_assoc($result0);
                                 $query01 = "SELECT * FROM unread_notification INNER JOIN notification ON (`unread_notification`.`idnotification` = `notification`.`idnotification`) WHERE idstudent='" . $row0["idstudent"] . "' AND status='active'";
                                 $result01 = mysqli_query($con, $query01) or die();
@@ -71,7 +71,7 @@ $user = $_SESSION["LoggedUser"];
                                 if ($user['type'] == "student") {
                                     $query = "SELECT * FROM `scheduled_event` INNER JOIN `student_subjects` ON (`scheduled_event`.`idsubject` = `student_subjects`.`idsubject`) INNER JOIN `student` ON (`student_subjects`.`idstudent` = `student`.`idstudent`) WHERE iduser='" . $user['iduser'] . "'";
                                 }
-                                $result = mysqli_query($con, $query) or die();
+                                $result = mysqli_query($con, $query);
                                 while ($row = mysqli_fetch_assoc($result)) {
                                     if ($row['eventstatus'] == 'active') {
                                         ?>
@@ -106,7 +106,7 @@ $user = $_SESSION["LoggedUser"];
                                 if ($user['type'] == "student") {
                                     $query1 = "SELECT * FROM `exam` INNER JOIN `subject` ON (`exam`.`idsubject` = `subject`.`idsubject`) INNER JOIN `exam_result` ON (`exam_result`.`idexam` = `exam`.`idexam`) INNER JOIN `student` ON (`exam_result`.`idstudent` = `student`.`idstudent`) WHERE `student`.`iduser`='" . $user['iduser'] . "'";
                                 }
-                                $result1 = mysqli_query($con, $query1) or die();
+                                $result1 = mysqli_query($con, $query1);
                                 while ($row = mysqli_fetch_assoc($result1)) {
                                     if ($row['examstatus'] == 'active') {
                                         ?>
@@ -132,7 +132,7 @@ $user = $_SESSION["LoggedUser"];
                     <?php
                     if ($user['type'] == "student") {
                         $query2 = "SELECT * FROM `exam_result` INNER JOIN `exam` ON (`exam_result`.`idexam` = `exam`.`idexam`) INNER JOIN `student` ON (`exam_result`.`idstudent` = `student`.`idstudent`) INNER JOIN `subject` ON (`exam`.`idsubject` = `subject`.`idsubject`) WHERE examstatus='done' AND iduser='" . $user['iduser'] . "' ORDER BY marks ASC";
-                        $result2 = mysqli_query($con, $query2) or die();
+                        $result2 = mysqli_query($con, $query2);
                         $row = mysqli_fetch_assoc($result2);
                         if (mysqli_num_rows($result2) == 0) {
                             return;
