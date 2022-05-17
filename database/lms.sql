@@ -54,12 +54,13 @@ CREATE TABLE `exam` (
   PRIMARY KEY (`idexam`),
   KEY `fk_exam_subject1` (`idsubject`),
   CONSTRAINT `fk_exam_subject1` FOREIGN KEY (`idsubject`) REFERENCES `subject` (`idsubject`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 /*Data for the table `exam` */
 
 insert  into `exam`(`idexam`,`idsubject`,`exam_title`,`date`,`start`,`end`,`examstatus`) values 
-(1,1,'HTML and CSS','2021-12-01','10:00','13:00','done');
+(1,1,'HTML and CSS','2021-12-01','10:00','13:00','done'),
+(2,1,'Understanding PHP','2022-05-20','13:45','15:45','active');
 
 /*Table structure for table `exam_result` */
 
@@ -75,13 +76,15 @@ CREATE TABLE `exam_result` (
   KEY `fk_exam_result_student1` (`idstudent`),
   CONSTRAINT `fk_exam_result_exam1` FOREIGN KEY (`idexam`) REFERENCES `exam` (`idexam`),
   CONSTRAINT `fk_exam_result_student1` FOREIGN KEY (`idstudent`) REFERENCES `student` (`idstudent`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 /*Data for the table `exam_result` */
 
 insert  into `exam_result`(`idresult`,`idexam`,`idstudent`,`marks`) values 
 (1,1,1,12),
-(2,1,2,56);
+(2,1,2,56),
+(3,2,2,0),
+(4,2,1,0);
 
 /*Table structure for table `lecturer` */
 
@@ -96,14 +99,16 @@ CREATE TABLE `lecturer` (
   KEY `fk_lecturer_iduser1_idx` (`iduser`),
   CONSTRAINT `fk_lecturer_idsubject1_idx` FOREIGN KEY (`idsubject`) REFERENCES `subject` (`idsubject`) ON UPDATE NO ACTION,
   CONSTRAINT `fk_lecturer_iduser1_idx` FOREIGN KEY (`iduser`) REFERENCES `user` (`iduser`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 /*Data for the table `lecturer` */
 
 insert  into `lecturer`(`idlecturer`,`iduser`,`idsubject`) values 
 (1,1,1),
 (2,4,1),
-(3,5,2);
+(3,5,2),
+(4,1,2),
+(5,1,3);
 
 /*Table structure for table `notification` */
 
@@ -231,13 +236,14 @@ CREATE TABLE `subject` (
   `subjectname` varchar(60) DEFAULT NULL,
   `status` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`idsubject`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 /*Data for the table `subject` */
 
 insert  into `subject`(`idsubject`,`subjectname`,`status`) values 
 (1,'PHP 2022','active'),
-(2,'HTML 2022','active');
+(2,'HTML 2022','active'),
+(3,'PM 2022','active');
 
 /*Table structure for table `unread_notification` */
 
