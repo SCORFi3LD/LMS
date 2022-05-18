@@ -51,7 +51,7 @@ if ($user['type'] != 'superadmin') {
                                     <select name="subject" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" required>
                                         <option value="" disabled selected>Select a subject</option>
                                         <?php
-                                        $query = "SELECT * FROM `subject` WHERE idsubject NOT IN (SELECT idsubject FROM `lecturer`) AND status='active'";
+                                        $query = "SELECT * FROM `subject` WHERE idsubject NOT IN (SELECT idsubject FROM `lecturer` WHERE iduser <> '1') AND status='active'";
                                         $result = mysqli_query($con, $query) or die();
                                         while ($row = mysqli_fetch_array($result)) {
                                             ?>
