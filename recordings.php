@@ -85,7 +85,7 @@ if (!isset($_SESSION["LoggedUser"])) {
                                                 </label>
                                                 <form action="actions/delete_recording.php">
                                                     <label class="block mt-4 text-sm" style="text-align:right;">
-                                                        <input type="text" name="recId"
+                                                        <input type="hidden" name="recId"
                                                                value="<?php echo $row1['idrecording']; ?>">
                                                         <button type="submit"
                                                                 class="px-4 py-2 text-sm font-medium text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-purple">
