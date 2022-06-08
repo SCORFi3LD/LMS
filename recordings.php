@@ -110,17 +110,19 @@ if (!isset($_SESSION["LoggedUser"])) {
                             <div class="mb-2">
                                 <div class="grid gap-6 mb-8 md:grid-cols-2">
                                     <?php
-                                    $query1 = "SELECT * FROM `student_subjects` INNER JOIN `student` ON (`student_subjects`.`idstudent` = `student`.`idstudent`) INNER JOIN `subject` ON (`student_subjects`.`idsubject` = `subject`.`idsubject`) INNER JOIN `recording` ON (`recording`.`idsubject` = `subject`.`idsubject`) INNER JOIN `user` ON (`student`.`iduser` = `user`.`iduser`) WHERE `user`.iduser='".$_SESSION["LoggedUser"]["iduser"]."'";
+                                    $query1 = "SELECT * FROM `student_subjects` INNER JOIN `student` ON (`student_subjects`.`idstudent` = `student`.`idstudent`) INNER JOIN `subject` ON (`student_subjects`.`idsubject` = `subject`.`idsubject`) INNER JOIN `recording` ON (`recording`.`idsubject` = `subject`.`idsubject`) INNER JOIN `user` ON (`student`.`iduser` = `user`.`iduser`) "
+                                            . "WHERE `user`.iduser='". $_SESSION["LoggedUser"]["iduser"] ."'";
                                     $result1 = mysqli_query($con, $query1);
                                     while ($row1 = mysqli_fetch_array($result1)) {
                                         ?>
                                         <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
                                             <video width="100%" height="315" controls="false" onclick="openFullscreen(this)">
-                                                <source src="<?= row1['urlstring'] ?>" type="video/mp4">
+                                                <source src="<?php echo $row1['urlstring'];?>" type="video/mp4">
                                                 Your browser does not support the video tag.
                                             </video>
                                         </div>
-                                    <?php }
+                                        <?php
+                                    }
                                     ?>
                                 </div>
                             </div>
